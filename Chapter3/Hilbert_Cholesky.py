@@ -69,6 +69,7 @@ def hc_solver(n, disturb=False):
 
     if disturb:
         b += np.power(10.0, -6) * np.random.uniform(-1,1,b.shape)
+        print ('10^-7 disturbance added to b')
 
     cholesky = Cholesky(H, b)
     cholesky.solve()
