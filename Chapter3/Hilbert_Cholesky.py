@@ -68,7 +68,8 @@ def hc_solver(n, disturb=False):
     b = hilbert.getB()
 
     if disturb:
-        b += np.power(10.0, -6) * np.random.uniform(-1,1,b.shape)
+        # b += np.power(10.0, -6) * np.random.uniform(-1,1,b.shape)
+        b[0] += 1e-7
         print ('10^-7 disturbance added to b')
 
     cholesky = Cholesky(H, b)
@@ -79,6 +80,6 @@ def hc_solver(n, disturb=False):
     print ('delta x-infinity is %.7f\n' % cholesky.get_delta_x_residual())
 
 hc_solver(10)
-hc_solver(10, disturb=True)
+hc_solver(12, disturb=True)
 hc_solver(8)
 hc_solver(12)

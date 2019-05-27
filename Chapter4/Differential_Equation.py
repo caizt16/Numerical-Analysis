@@ -36,7 +36,8 @@ class Iterative_Solver(object):
         pre_x = np.ones((self.n,1))
 
         #while np.max(np.abs(self.b - np.dot(self.A, self.x))) > self.error:
-        while np.max(np.abs(self.x - pre_x)) > self.error:
+        #while np.max(np.abs(self.x - pre_x)) > self.error:
+        while np.sqrt(np.sum(np.square(self.x - pre_x))) > self.error:
             cnt += 1
             pre_x = np.copy(self.x)
 
@@ -62,18 +63,20 @@ class Eval(object):
         self.true = 0
 
     def compare(self):
-        pass
+        print 'jacobian error: %.7f' % np.max(np.abs(np.subtract(self.j, self.true)))
+        print 'gs error: %.7f' % np.max(np.abs(np.subtract(self.gs, self.true)))
+        print 'sor error: %.7f' % np.max(np.abs(np.subtract(self.sor, self.true)))
 
-solver = Iterative_Solver(1, 0.5, 100)
+solver = Iterative_Solver(0.001, 0.5, 100)
 evaler = Eval()
-evaler.j = solver.Jacobian()
-print evaler.j
-'''
-evaler.gs = solver.Gauss_Seidel()
-evaler.sor = solver.SOR(omega=1.95)
-'''
-evaler.true = solver.Direct()
-print evaler.true
+evaler.j = solver.Jacobian()[1]
+#print evaler.j
+evaler.gs = solver.Gauss_Seidel()[1]
+evaler.sor = solver.SOR(omega=1.1)[1]
+evaler.sor = solver.SOR(omega=1.2)[1]
+#print evaler.gs
+evaler.true = solver.Direct()[1]
+#print evaler.true
 #print solver.b, np.dot(solver.A, evaler.true)
 evaler.compare()
 
