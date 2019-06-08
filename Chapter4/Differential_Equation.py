@@ -72,10 +72,11 @@ evaler = Eval()
 evaler.j = solver.Jacobian()[1]
 #print evaler.j
 evaler.gs = solver.Gauss_Seidel()[1]
-evaler.sor = solver.SOR(omega=1.1)[1]
-evaler.sor = solver.SOR(omega=1.2)[1]
+#evaler.sor = solver.SOR(omega=1.2)[1]
 #print evaler.gs
-evaler.true = solver.Direct()[1]
+evaler.sor = solver.SOR(omega=1.1)[1]
+#print evaler.sor
+evaler.true = solver.Direct().T[0]
 #print evaler.true
 #print solver.b, np.dot(solver.A, evaler.true)
 evaler.compare()
