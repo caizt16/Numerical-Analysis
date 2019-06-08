@@ -66,7 +66,18 @@ for i in range(1, n-1):
 
 M = np.linalg.solve(A, d)
 
-#plt.plot(x, y)
+def get_ans(x):
+    print 'f(x):', S(x)
+    print 'f\'(x):', S1(x)
+    print 'f\'\'(x):', S2(x)
+
+get_ans(2)
+get_ans(30)
+get_ans(130)
+get_ans(350)
+get_ans(515)
+
+plt.plot(x, y)
 rx = np.arange(1, 500, 5)
 ry = []
 ryy = []
@@ -75,9 +86,9 @@ for xx in rx:
     ry.append(S(xx))
     ryy.append(S1(xx))
     ryyy.append(S2(xx))
-#plt.plot(rx, ry)
-plt.plot(rx, ryy)
-plt.plot(rx, ryyy)
+plt.plot(rx, ry)
+#plt.plot(rx, ryy)
+#plt.plot(rx, ryyy)
 plt.show()
-print ryy
-print ryyy
+#print ryy
+#print ryyy

@@ -20,9 +20,11 @@ def two_norm(x, y):
 t = np.arange(1, 8.5, 0.5)
 y = np.array([33.40, 79.50, 122.65, 159.05, 189.15, 214.15, 238.65, 252.2, 267.55, 280.50, 296.65, 301.65, 310.40, 318.15, 325.15])
 
-x, ey = exp(t, y)
 x, py = poly(t, y)
+print(py)
 
+x, ey = exp(t, y)
+print(ey)
 
 plt.plot(t, y)
 plt.plot(t, py)
